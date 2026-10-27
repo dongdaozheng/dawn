@@ -1,0 +1,17 @@
+{
+  "packages/frontend/src/index.ts": {
+    "file": "index-DRCIcSoV.js",
+    "name": "index",
+    "src": "packages/frontend/src/index.ts",
+    "isEntry": true
+  },
+  "packages/frontend/src/theme.css": {
+    "file": "theme-N6lQkotJ.css",
+    "name": "theme",
+    "names": [
+      "theme.css"
+    ],
+    "src": "packages/frontend/src/theme.css",
+    "isEntry": true
+  }
+}

@@ -1,0 +1,2 @@
+# Themes are started with --path stores/<store>.
+# Shared source lives in packages/ and is copied or compiled into a store before upload.

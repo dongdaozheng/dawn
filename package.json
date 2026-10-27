@@ -1,0 +1,43 @@
+{
+  "name": "shopify-theme",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "description": "[![Build status](https://github.com/shopify/dawn/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Shopify/dawn/actions/workflows/ci.yml?query=branch%3Amain)\r [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?color=informational)](/.github/CONTRIBUTING.md)",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "sync": "node scripts/sync-shared.mjs",
+    "dev": "turbo run dev --filter=@shopify-theme/store-a",
+    "dev:store-a": "turbo run dev --filter=@shopify-theme/store-a",
+    "dev:store-b": "turbo run dev --filter=@shopify-theme/store-b",
+    "build": "turbo run build",
+    "build:store-a": "turbo run build --filter=@shopify-theme/store-a",
+    "build:store-b": "turbo run build --filter=@shopify-theme/store-b",
+    "deploy:store-a": "turbo run build --filter=@shopify-theme/store-a && shopify theme push --path stores/store-a",
+    "deploy:store-b": "turbo run build --filter=@shopify-theme/store-b && shopify theme push --path stores/store-b"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dongdaozheng/dawn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dongdaozheng/dawn/issues"
+  },
+  "homepage": "https://github.com/dongdaozheng/dawn#readme",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "protobufjs"
+    ]
+  },
+  "devDependencies": {
+    "@driver-digital/vite-plugin-shopify-clean": "^2.0.2",
+    "@shopify/cli": "^4.9.4",
+    "turbo": "^2.11.10",
+    "vite": "^8.3.5",
+    "vite-plugin-shopify": "^5.0.0"
+  }
+}

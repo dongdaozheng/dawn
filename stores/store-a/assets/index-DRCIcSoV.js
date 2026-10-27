@@ -1,0 +1,1 @@
+var e=class{cart;constructor(e){this.cart=e,console.log(`Cart constructor`,this.cart)}};function t(e){if(e.length===0)throw Error(`rootSelector is required`);return{rootSelector:e}}t(`#MainContent`);var n=new e;console.log(n);

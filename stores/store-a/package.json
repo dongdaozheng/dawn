@@ -1,0 +1,15 @@
+{
+  "name": "@shopify-theme/store-a",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node ../../scripts/run.mjs store-a dev",
+    "build": "node ../../scripts/run.mjs store-a build"
+  },
+  "dependencies": {
+    "@repo/frontend": "workspace:*",
+    "@repo/sections": "workspace:*",
+    "@repo/snippets": "workspace:*"
+  }
+}

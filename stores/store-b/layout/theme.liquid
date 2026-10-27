@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ page_title }}</title>
+    {{ content_for_header }}
+    {% render 'vite-tag', entry: 'theme.css', preload_stylesheet: true %}
+    {% render 'vite-tag', entry: 'index.ts' %}
+  </head>
+  <body>
+    {{ content_for_layout }}
+  </body>
+</html>
