@@ -2,6 +2,7 @@
   "name": "@shopify-theme/store-a",
   "version": "1.0.0",
   "private": true,
+  "themeRepository": "https://github.com/dongdaozheng/dawn-store-a.git",
   "type": "module",
   "scripts": {
     "dev": "node ../../scripts/run.mjs store-a dev",

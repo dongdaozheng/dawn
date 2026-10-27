@@ -15,7 +15,9 @@
     "build:store-a": "turbo run build --filter=@shopify-theme/store-a",
     "build:store-b": "turbo run build --filter=@shopify-theme/store-b",
     "deploy:store-a": "turbo run build --filter=@shopify-theme/store-a && shopify theme push --path stores/store-a",
-    "deploy:store-b": "turbo run build --filter=@shopify-theme/store-b && shopify theme push --path stores/store-b"
+    "deploy:store-b": "turbo run build --filter=@shopify-theme/store-b && shopify theme push --path stores/store-b",
+    "github:store-a": "node scripts/publish-theme.mjs store-a",
+    "github:store-b": "node scripts/publish-theme.mjs store-b"
   },
   "repository": {
     "type": "git",

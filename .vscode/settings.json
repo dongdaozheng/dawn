@@ -1,0 +1,6 @@
+{
+  "files.exclude": {
+    "stores/store-a/sections/test.liquid": true,
+    "stores/store-b/sections/test.liquid": true
+  }
+}

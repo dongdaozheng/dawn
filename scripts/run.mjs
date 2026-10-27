@@ -1,4 +1,5 @@
 import { spawn } from 'node:child_process'
+import { watch } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { syncStore } from './sync-shared.mjs'
@@ -37,10 +38,39 @@ function stopAll() {
   }
 }
 
+function watchSharedPackages() {
+  let timer
+  const onChange = () => {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      syncStore(store).catch((error) => console.error(error))
+    }, 150)
+  }
+
+  const watchers = []
+  for (const folder of ['sections', 'snippets']) {
+    try {
+      watchers.push(watch(path.join(repoRoot, 'packages', folder), { recursive: true }, onChange))
+    } catch {
+      // The package folder is created when the first shared file is added.
+    }
+  }
+
+  return () => {
+    clearTimeout(timer)
+    for (const watcher of watchers) watcher.close()
+  }
+}
+
 if (action === 'build') {
   const build = start('pnpm', ['exec', 'vite', 'build', '--config', viteConfig])
   build.on('exit', (code) => process.exit(code ?? 1))
 } else if (action === 'dev') {
+  const stopWatch = watchSharedPackages()
+  const stopAllAndWatch = () => {
+    stopWatch()
+    stopAll()
+  }
   start('pnpm', ['--filter', '@repo/frontend', 'dev'])
   const shopify = start('pnpm', [
     'exec',
@@ -55,13 +85,13 @@ if (action === 'build') {
 
   for (const child of [shopify, vite]) {
     child.on('exit', (code) => {
-      stopAll()
+      stopAllAndWatch()
       process.exit(code ?? 1)
     })
   }
 
   process.on('SIGINT', () => {
-    stopAll()
+    stopAllAndWatch()
     process.exit(0)
   })
 } else {

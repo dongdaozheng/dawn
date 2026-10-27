@@ -11,4 +11,12 @@ Thumbs.db
 node_modules
 .turbo
 dist
+.deploy-worktrees
+.theme-repos
 *.zip
+
+# BEGIN synced-shared
+stores/store-a/sections/test.liquid
+stores/store-b/sections/test.liquid
+# END synced-shared
+

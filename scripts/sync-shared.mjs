@@ -77,6 +77,22 @@ async function hideSyncedFiles() {
 
   await mkdir(path.dirname(settingsPath), { recursive: true })
   await writeFile(settingsPath, `${JSON.stringify(settings, null, 2)}\n`)
+  await writeSyncedGitignore(Object.keys(synced))
+}
+
+async function writeSyncedGitignore(paths) {
+  const gitignorePath = path.join(repoRoot, '.gitignore')
+  let text = ''
+  try {
+    text = await readFile(gitignorePath, 'utf8')
+  } catch {
+    text = ''
+  }
+
+  const block = ['# BEGIN synced-shared', ...paths.toSorted(), '# END synced-shared'].join('\n')
+  const pattern = /# BEGIN synced-shared[\s\S]*?# END synced-shared\n?/
+  text = pattern.test(text) ? text.replace(pattern, `${block}\n`) : `${text.replace(/\s*$/, '')}\n\n${block}\n`
+  await writeFile(gitignorePath, text)
 }
 
 export async function syncStore(store) {
